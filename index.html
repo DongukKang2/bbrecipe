@@ -1,95 +1,409 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BB Recipe 메뉴판</title>
-  <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      background-color: #ff5a5f;
-      color: #fff;
-      padding: 20px;
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-    .menu {
-      padding: 20px;
-    }
-    .menu-item {
-      margin-bottom: 20px;
-      padding: 15px;
-      border-radius: 12px;
-      background-color: #f9f9f9;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .menu-item img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 8px;
-    }
-    .menu-item h3 {
-      margin: 10px 0 5px;
-      font-size: 1.2em;
-    }
-    .menu-item p {
-      margin: 0;
-      font-size: 1em;
-      color: #666;
-    }
-    .btn-group {
-      margin-top: 20px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      margin: 5px;
-      font-size: 1em;
-      border-radius: 8px;
-      text-decoration: none;
-      background-color: #ff5a5f;
-      color: white;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background-color: #e14c50;
-    }
-  </style>
-</head>
-<body>
-  <header>BB Recipe 메뉴판</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B.B RECIPE - STEAK · PASTA · COFFEE</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-  <section class="menu">
-    <div class="menu-item">
-      <img src="coffee.png" alt="아메리카노" />
-      <h3>아메리카노</h3>
-      <p>₩4,000</p>
+      body {
+        font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .logo {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        letter-spacing: -2px;
+      }
+
+      .tagline {
+        font-size: 16px;
+        letter-spacing: 3px;
+        opacity: 0.9;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .status-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin: -30px 20px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .status-badge {
+        background: #4caf50;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .hours {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #666;
+      }
+
+      .section {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #1e3c72;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .signature-item {
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 12px;
+      }
+
+      .signature-name {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .signature-price {
+        color: #2a5298;
+        font-weight: bold;
+      }
+
+      .signature-desc {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .menu-category {
+        margin-bottom: 20px;
+      }
+
+      .menu-header {
+        background: #f0f4f8;
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s;
+      }
+
+      .menu-header:hover {
+        background: #e1e8f0;
+      }
+
+      .menu-content {
+        display: none;
+        padding: 15px;
+      }
+
+      .menu-content.active {
+        display: block;
+      }
+
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .menu-item:last-child {
+        border: none;
+      }
+
+      .action-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .btn {
+        display: block;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: transform 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: #2a5298;
+        color: white;
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #2a5298;
+        border: 2px solid #2a5298;
+      }
+
+      .info-grid {
+        display: grid;
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .info-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #1e3c72;
+        min-width: 60px;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 30px 20px;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .social-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #f0f4f8;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #2a5298;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .social-link:hover {
+        background: #e1e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo">B.B RECIPE</div>
+      <div class="tagline">STEAK · PASTA · COFFEE</div>
     </div>
 
-    <div class="menu-item">
-      <img src="latte.png" alt="카페라떼" />
-      <h3>카페라떼</h3>
-      <p>₩4,500</p>
+    <div class="status-card">
+      <div class="status">
+        <span class="status-badge">영업중</span>
+        <span style="color: #666">오늘 21:00까지</span>
+      </div>
+      <div class="hours">
+        <div>평일 09:00 - 11:00 (아침뺑)</div>
+        <div>런치타임 11:00 - 15:00</div>
+        <div>디너타임 15:00 - 21:00</div>
+        <div style="margin-top: 10px; color: #2a5298">
+          ✨ 모든 메뉴 포장 가능 (샐러드/아메리카노 무료)
+        </div>
+      </div>
     </div>
 
-    <div class="menu-item">
-      <img src="dessert.png" alt="초코 케이크" />
-      <h3>초코 케이크</h3>
-      <p>₩5,000</p>
-    </div>
-  </section>
+    <div class="container">
+      <div class="section">
+        <div class="section-title">⭐ SIGNATURE</div>
+        <div class="signature-item">
+          <div class="signature-name">반반 라자냐</div>
+          <div class="signature-price">9,900원</div>
+          <div class="signature-desc">
+            마이 라자냐 + 크리소 라구 라자냐를 동시에!
+          </div>
+        </div>
+        <div class="signature-item">
+          <div class="signature-name">매쉬 라자냐</div>
+          <div class="signature-price">9,900원</div>
+          <div class="signature-desc">
+            담백한 매쉬포테이토와 완포옥 치즈가 라자냐와 쏘옥!
+          </div>
+        </div>
+        <div class="signature-item">
+          <div class="signature-name">클래식 라구 라자냐</div>
+          <div class="signature-price">10,900원</div>
+          <div class="signature-desc">
+            직접 만든 라구 소스에 완포옥 치즈가 라자냐 안에 쏘옥!
+          </div>
+        </div>
+      </div>
 
-  <div class="btn-group">
-    <a href="tel:01012345678" class="btn">전화하기</a>
-    <a href="https://map.naver.com/p/entry/place/12345678" class="btn">네이버 지도</a>
-    <a href="https://instagram.com/bbrecipe" class="btn">인스타그램</a>
-  </div>
-</body>
+      <div class="section">
+        <div class="section-title">🍽️ MENU</div>
+
+        <div class="menu-category">
+          <div class="menu-header" onclick="toggleMenu('steak')">
+            <span>STEAK</span>
+            <span>▼</span>
+          </div>
+          <div class="menu-content" id="steak">
+            <div class="menu-item">
+              <span>갈릭 안심 등심 스테이크</span>
+              <span>44,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>크림 안심 스테이크</span>
+              <span>49,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <div class="menu-header" onclick="toggleMenu('pasta')">
+            <span>PASTA</span>
+            <span>▼</span>
+          </div>
+          <div class="menu-content" id="pasta">
+            <div class="menu-item">
+              <span>투움바 크림 파스타</span>
+              <span>16,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>비스큐 쉬림프 오일 파스타</span>
+              <span>16,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>베이컨 로제 파스타</span>
+              <span>16,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>토마토 미트 파스타</span>
+              <span>16,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>알리오 올리오</span>
+              <span>15,000원</span>
+            </div>
+            <div class="menu-item">
+              <span>쌀러드 파스타</span>
+              <span>15,000원</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <div class="menu-header" onclick="toggleMenu('lunch')">
+            <span>LUNCH SET</span>
+            <span>▼</span>
+          </div>
+          <div class="menu-content" id="lunch">
+            <div style="padding: 10px; background: #f8f9fa; border-radius: 8px">
+              <div style="font-weight: bold; margin-bottom: 10px">
+                메인메뉴 + 3,000원 추가시
+              </div>
+              <div style="color: #666; font-size: 14px">
+                • 요프 or 쌀러드 + 아메리카노<br />
+                • 음료 변경 가능 (추가금액 발생)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">📍 방문 안내</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">위치</span>
+            <span>울산시 울주군 삼경1길 63</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">주차</span>
+            <span>매장 앞 주차 가능</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">예약</span>
+            <span>인스타그램 DM @sseu.lee</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="https://naver.me/5XJXGQIT" class="btn btn-primary"
+            >네이버 예약</a
+          >
+          <a href="tel:전화번호" class="btn btn-secondary">전화 문의</a>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a
+          href="https://search.naver.com/search.naver?query=비비레시피"
+          class="social-link"
+          >네이버</a
+        >
+        <a href="https://www.instagram.com/bb.recipe/" class="social-link"
+          >인스타그램</a
+        >
+        <a href="https://naver.me/5XJXGQIT" class="social-link">지도</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>주문은 카운터에서 선결제 부탁드립니다 💙</p>
+      <p style="margin-top: 10px; font-size: 12px">
+        © 2024 B.B RECIPE. All rights reserved.
+      </p>
+    </div>
+
+    <script>
+      function toggleMenu(id) {
+        const menu = document.getElementById(id);
+        menu.classList.toggle("active");
+      }
+    </script>
+  </body>
 </html>
