@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BB Recipe 메뉴판</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      background-color: #ff5a5f;
+      color: #fff;
+      padding: 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .menu {
+      padding: 20px;
+    }
+    .menu-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .menu-item img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    .menu-item h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2em;
+    }
+    .menu-item p {
+      margin: 0;
+      font-size: 1em;
+      color: #666;
+    }
+    .btn-group {
+      margin-top: 20px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      margin: 5px;
+      font-size: 1em;
+      border-radius: 8px;
+      text-decoration: none;
+      background-color: #ff5a5f;
+      color: white;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background-color: #e14c50;
+    }
+  </style>
+</head>
+<body>
+  <header>BB Recipe 메뉴판</header>
+
+  <section class="menu">
+    <div class="menu-item">
+      <img src="coffee.png" alt="아메리카노" />
+      <h3>아메리카노</h3>
+      <p>₩4,000</p>
+    </div>
+
+    <div class="menu-item">
+      <img src="latte.png" alt="카페라떼" />
+      <h3>카페라떼</h3>
+      <p>₩4,500</p>
+    </div>
+
+    <div class="menu-item">
+      <img src="dessert.png" alt="초코 케이크" />
+      <h3>초코 케이크</h3>
+      <p>₩5,000</p>
+    </div>
+  </section>
+
+  <div class="btn-group">
+    <a href="tel:01012345678" class="btn">전화하기</a>
+    <a href="https://map.naver.com/p/entry/place/12345678" class="btn">네이버 지도</a>
+    <a href="https://instagram.com/bbrecipe" class="btn">인스타그램</a>
+  </div>
+</body>
+</html>
